@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Category
+
+# Model Form Field configuration
+form: $/nethavn/gallery/models/category/fields.yaml
+
+# Model Class name
+modelClass: nethavn\gallery\Models\Category
+
+# Default redirect location
+defaultRedirect: nethavn/gallery/categories
+
+# Create page
+create:
+    title: Create Category
+    redirect: nethavn/gallery/categories/update/:id
+    redirectClose: nethavn/gallery/categories
+
+# Update page
+update:
+    title: Edit Category
+    redirect: nethavn/gallery/categories
+    redirectClose: nethavn/gallery/categories
+
+# Preview page
+preview:
+    title: Preview Category

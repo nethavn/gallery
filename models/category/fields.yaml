@@ -1,0 +1,23 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    name:
+        span: left
+        label: nethavn.gallery::lang.modeldata.name
+        placeholder: nethavn.gallery::lang.modeldata.name_placeholder
+
+    slug:
+        label: nethavn.gallery::lang.modeldata.slug
+        span: right
+        placeholder: nethavn.gallery::lang.modeldata.slug_placeholder
+        preset:
+            field: name
+            type: slug
+    
+    description:
+        label: nethavn.gallery::lang.modeldata.description
+        span: full
+        type: textarea
+        placeholder: nethavn.gallery::lang.modeldata.description_placeholder

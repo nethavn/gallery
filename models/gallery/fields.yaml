@@ -1,0 +1,57 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+tabs:
+    fields:
+        name:
+            span: left
+            label: nethavn.gallery::lang.modeldata.name
+            placeholder: nethavn.gallery::lang.modeldata.name_placeholder
+            tab: nethavn.gallery::lang.tabs.info
+
+        slug:
+            label: nethavn.gallery::lang.modeldata.slug
+            span: right
+            tab: nethavn.gallery::lang.tabs.info
+            placeholder: nethavn.gallery::lang.modeldata.slug_placeholder
+            preset:
+                field: name
+                type: slug
+
+        images:
+            label: nethavn.gallery::lang.modeldata.images
+            type: fileupload
+            mode: image
+            tab: nethavn.gallery::lang.tabs.info
+            imageHeight: 150
+            imageWidth: 250
+
+        categories:
+            commentAbove: nethavn.gallery::lang.modeldata.categories
+            type: relation
+            tab: nethavn.gallery::lang.tabs.settings
+
+        description:
+            label: nethavn.gallery::lang.modeldata.description
+            span: full
+            type: textarea
+            tab: nethavn.gallery::lang.tabs.info
+            placeholder: nethavn.gallery::lang.modeldata.description_placeholder
+
+        published:
+            label: nethavn.gallery::lang.modeldata.published
+            type: switch
+            span: left
+            tab: nethavn.gallery::lang.tabs.settings
+
+        published_at:
+            label: nethavn.gallery::lang.modeldata.published_at
+            type: datepicker
+            mode: date
+            span: left
+            tab: nethavn.gallery::lang.tabs.settings
+            trigger:
+                action: enable
+                field: published
+                condition: checked

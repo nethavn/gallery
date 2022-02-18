@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: nethavn.gallery::lang.idgallery.title
+
+# Model Form Field configuration
+form: $/nethavn/gallery/models/gallery/fields.yaml
+
+# Model Class name
+modelClass: nethavn\gallery\Models\Gallery
+
+# Default redirect location
+defaultRedirect: nethavn/gallery/galleries
+
+# Create page
+create:
+    title: nethavn.gallery::lang.form.create
+    redirect: nethavn/gallery/galleries/update/:id
+    redirectClose: nethavn/gallery/galleries
+
+# Update page
+update:
+    title: nethavn.gallery::lang.form.update
+    redirect: nethavn/gallery/galleries
+    redirectClose: nethavn/gallery/galleries
+
+# Preview page
+preview:
+    title: nethavn.gallery::lang.form.preview
