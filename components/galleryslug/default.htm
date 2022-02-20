@@ -11,7 +11,8 @@
 {% put scripts %}
 <script>
     document.addEventListener("DOMContentLoaded", function (event) {
-        var {{ __SELF__ }} = $("#{{ __SELF__ }}").lightGallery({
+        const $galCont = document.getElementById("{{ __SELF__ }}");
+        var {{ __SELF__ }} = lightGallery($galCont,{
             // Elements
             thumbnail   : {{ thumbnail }},
             caption     : {{ caption }},
