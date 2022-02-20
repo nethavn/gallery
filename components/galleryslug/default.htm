@@ -10,7 +10,7 @@
 
 {% put scripts %}
 <script>
-    $(document).ready(function() {
+    document.addEventListener("DOMContentLoaded", function (event) {
         var {{ __SELF__ }} = $("#{{ __SELF__ }}").lightGallery({
             // Elements
             thumbnail   : {{ thumbnail }},
