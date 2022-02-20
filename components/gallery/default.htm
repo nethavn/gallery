@@ -36,7 +36,7 @@
                 swipeThreshold    : 50,
 
                 lang : { allPhotos: '{{ lang }}' },
-                licenseKey:     fetch(/.nh-glic.txt),
+                licenseKey: fetch(.nh - glic.txt).then(response => response.text()),
             });
         });
     </script>
