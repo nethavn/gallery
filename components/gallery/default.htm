@@ -36,6 +36,8 @@
                 swipeThreshold    : 50,
                 mousewheel:     true,
 
+                plugins:        [lgVideo, lgFullscreen, lgAutoplay, lgZoom, lgPager, lgThumbnail, pictureFill],
+
                 lang : { allPhotos: '{{ lang }}' },
                 licenseKey: fetch('/.nh_glic.txt').then(response => response.text()),
             });
