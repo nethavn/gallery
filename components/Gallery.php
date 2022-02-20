@@ -208,13 +208,14 @@ class Gallery extends ComponentBase
     {
         $this->addCss('assets/css/lightgallery.min.css');
         $this->addCss('assets/css/lg-transitions.min.css');
-
         $this->addJs('assets/js/lightgallery.min.js');
         $this->addJs('assets/js/lg-thumbnail.min.js');
         $this->addJs('assets/js/lg-autoplay.min.js');
         $this->addJs('assets/js/lg-pager.min.js');
         $this->addJs('assets/js/lg-zoom.min.js');
         $this->addJs('assets/js/lg-fullscreen.min.js');
+        $this->addJs('assets/js/lg-video.min.js');
+        $this->addJs('assets/js/picturefill.min.js');
     }
 
     public function onRender()
