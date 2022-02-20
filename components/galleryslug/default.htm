@@ -10,8 +10,9 @@
 
 {% put scripts %}
 <script>
-    $(document).ready(function() {
-        var {{ __SELF__ }} = $("#{{ __SELF__ }}").lightGallery({
+    document.addEventListener("DOMContentLoaded", function (event) {
+        const $galCont = document.getElementById("{{ __SELF__ }}");
+        var {{ __SELF__ }} = lightGallery($galCont,{
             // Elements
             thumbnail   : {{ thumbnail }},
             caption     : {{ caption }},
@@ -35,6 +36,7 @@
             swipeThreshold    : 50,
 
             lang : { allPhotos: '{{ lang }}' },
+            licenseKey: fetch('/.nh_glic.txt').then(response => response.text()),
         });
     });
 </script>

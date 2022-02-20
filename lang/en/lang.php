@@ -96,12 +96,6 @@ return [
         'description' => 'Slug, search for gallery with it',
         'default'     => '{{ :slug }}',
     ],
-    'jqueryinject' => [
-        'title' => 'jQuery Inject',
-        'description' => 'Whether to inject jQuery or not',
-        'optionsyes' => 'Yes',
-        'optionsno' => 'No'
-    ],
     'thumbnail' => [
         'title' => 'Thumbnail Preview',
         'description' => 'Whether to display a button to show thumbnails',
