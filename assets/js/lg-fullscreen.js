@@ -1,116 +1,135 @@
-/*! lg-fullscreen - v1.0.0 - 2016-09-20
-* http://sachinchoolur.github.io/lightGallery
-* Copyright (c) 2016 Sachin N; Licensed GPLv3 */
+/*!
+ * lightgallery | 2.4.0 | January 29th 2022
+ * http://www.lightgalleryjs.com/
+ * Copyright (c) 2020 Sachin Neravath;
+ * @license GPLv3
+ */
 
-(function (root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module unless amdModuleId is set
-    define([], function () {
-      return (factory());
-    });
-  } else if (typeof exports === 'object') {
-    // Node. Does not work with strict CommonJS, but
-    // only CommonJS-like environments that support module.exports,
-    // like Node.
-    module.exports = factory();
-  } else {
-    factory();
-  }
-}(this, function () {
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation.
 
-(function($, window, document, undefined) {
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
 
-    'use strict';
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */
 
-    var defaults = {
-        fullScreen: true
+var __assign = function() {
+    __assign = Object.assign || function __assign(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+        }
+        return t;
     };
+    return __assign.apply(this, arguments);
+};
 
-    var Fullscreen = function(element) {
+var fullscreenSettings = {
+    fullScreen: true,
+    fullscreenPluginStrings: {
+        toggleFullscreen: 'Toggle Fullscreen',
+    },
+};
 
-        // get lightGallery core plugin data
-        this.core = $(element).data('lightGallery');
-
-        this.$el = $(element);
-
-        // extend module defalut settings with lightGallery core settings
-        this.core.s = $.extend({}, defaults, this.core.s);
-
-        this.init();
-
+var FullScreen = /** @class */ (function () {
+    function FullScreen(instance, $LG) {
+        // get lightGallery core plugin instance
+        this.core = instance;
+        this.$LG = $LG;
+        // extend module default settings with lightGallery core settings
+        this.settings = __assign(__assign({}, fullscreenSettings), this.core.settings);
         return this;
-    };
-
-    Fullscreen.prototype.init = function() {
+    }
+    FullScreen.prototype.init = function () {
         var fullScreen = '';
-        if (this.core.s.fullScreen) {
-
+        if (this.settings.fullScreen) {
             // check for fullscreen browser support
-            if (!document.fullscreenEnabled && !document.webkitFullscreenEnabled &&
-                !document.mozFullScreenEnabled && !document.msFullscreenEnabled) {
+            if (!document.fullscreenEnabled &&
+                !document.webkitFullscreenEnabled &&
+                !document.mozFullScreenEnabled &&
+                !document.msFullscreenEnabled) {
                 return;
-            } else {
-                fullScreen = '<span class="lg-fullscreen lg-icon"></span>';
-                this.core.$outer.find('.lg-toolbar').append(fullScreen);
+            }
+            else {
+                fullScreen = "<button type=\"button\" aria-label=\"" + this.settings.fullscreenPluginStrings['toggleFullscreen'] + "\" class=\"lg-fullscreen lg-icon\"></button>";
+                this.core.$toolbar.append(fullScreen);
                 this.fullScreen();
             }
         }
     };
-
-    Fullscreen.prototype.requestFullscreen = function() {
+    FullScreen.prototype.isFullScreen = function () {
+        return (document.fullscreenElement ||
+            document.mozFullScreenElement ||
+            document.webkitFullscreenElement ||
+            document.msFullscreenElement);
+    };
+    FullScreen.prototype.requestFullscreen = function () {
         var el = document.documentElement;
         if (el.requestFullscreen) {
             el.requestFullscreen();
-        } else if (el.msRequestFullscreen) {
+        }
+        else if (el.msRequestFullscreen) {
             el.msRequestFullscreen();
-        } else if (el.mozRequestFullScreen) {
+        }
+        else if (el.mozRequestFullScreen) {
             el.mozRequestFullScreen();
-        } else if (el.webkitRequestFullscreen) {
+        }
+        else if (el.webkitRequestFullscreen) {
             el.webkitRequestFullscreen();
         }
     };
-
-    Fullscreen.prototype.exitFullscreen = function() {
+    FullScreen.prototype.exitFullscreen = function () {
         if (document.exitFullscreen) {
             document.exitFullscreen();
-        } else if (document.msExitFullscreen) {
+        }
+        else if (document.msExitFullscreen) {
             document.msExitFullscreen();
-        } else if (document.mozCancelFullScreen) {
+        }
+        else if (document.mozCancelFullScreen) {
             document.mozCancelFullScreen();
-        } else if (document.webkitExitFullscreen) {
+        }
+        else if (document.webkitExitFullscreen) {
             document.webkitExitFullscreen();
         }
     };
-
     // https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/Using_full_screen_mode
-    Fullscreen.prototype.fullScreen = function() {
+    FullScreen.prototype.fullScreen = function () {
         var _this = this;
-
-        $(document).on('fullscreenchange.lg webkitfullscreenchange.lg mozfullscreenchange.lg MSFullscreenChange.lg', function() {
-            _this.core.$outer.toggleClass('lg-fullscreen-on');
+        this.$LG(document).on("fullscreenchange.lg.global" + this.core.lgId + " \n            webkitfullscreenchange.lg.global" + this.core.lgId + " \n            mozfullscreenchange.lg.global" + this.core.lgId + " \n            MSFullscreenChange.lg.global" + this.core.lgId, function () {
+            if (!_this.core.lgOpened)
+                return;
+            _this.core.outer.toggleClass('lg-fullscreen-on');
         });
-
-        this.core.$outer.find('.lg-fullscreen').on('click.lg', function() {
-            if (!document.fullscreenElement &&
-                !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
-                _this.requestFullscreen();
-            } else {
+        this.core.outer
+            .find('.lg-fullscreen')
+            .first()
+            .on('click.lg', function () {
+            if (_this.isFullScreen()) {
                 _this.exitFullscreen();
             }
+            else {
+                _this.requestFullscreen();
+            }
         });
-
     };
-
-    Fullscreen.prototype.destroy = function() {
-
+    FullScreen.prototype.closeGallery = function () {
         // exit from fullscreen if activated
-        this.exitFullscreen();
-
-        $(document).off('fullscreenchange.lg webkitfullscreenchange.lg mozfullscreenchange.lg MSFullscreenChange.lg');
+        if (this.isFullScreen()) {
+            this.exitFullscreen();
+        }
     };
+    FullScreen.prototype.destroy = function () {
+        this.$LG(document).off("fullscreenchange.lg.global" + this.core.lgId + " \n            webkitfullscreenchange.lg.global" + this.core.lgId + " \n            mozfullscreenchange.lg.global" + this.core.lgId + " \n            MSFullscreenChange.lg.global" + this.core.lgId);
+    };
+    return FullScreen;
+}());
 
-    $.fn.lightGallery.modules.fullscreen = Fullscreen;
-
-})(jQuery, window, document);
-
-}));
+export default FullScreen;
+//# sourceMappingURL=lg-fullscreen.es5.js.map

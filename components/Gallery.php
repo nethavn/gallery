@@ -28,13 +28,6 @@ class Gallery extends ComponentBase
                 'type'        => 'string',
                 'default'     => Lang::get('nethavn.gallery::lang.misc.defaultname'),
             ],
-            'jqueryinject' => [
-                'title'       => 'nethavn.gallery::lang.jqueryinject.title',
-                'description' => 'nethavn.gallery::lang.jqueryinject.description',
-                'type'        => 'dropdown',
-                'default'     => 'yes',
-                'options'     => ['yes' => 'nethavn.gallery::lang.jqueryinject.optionsyes', 'no' => 'nethavn.gallery::lang.jqueryinject.optionsno'],
-            ],
             'thumbnail'    => [
                 'title'       => 'nethavn.gallery::lang.thumbnail.title',
                 'description' => 'nethavn.gallery::lang.thumbnail.description',
@@ -213,15 +206,10 @@ class Gallery extends ComponentBase
 
     public function onRun()
     {
-        if ($this->property('jqueryinject') == "yes") {
-            $this->addJs('assets/js/jquery-1.9.1.min.js');
-        }
-
         $this->addCss('assets/css/lightgallery.min.css');
         $this->addCss('assets/css/lg-transitions.min.css');
 
         $this->addJs('assets/js/lightgallery.min.js');
-        $this->addJs('assets/js/jquery.mousewheel.min.js');
         $this->addJs('assets/js/lg-thumbnail.min.js');
         $this->addJs('assets/js/lg-autoplay.min.js');
         $this->addJs('assets/js/lg-pager.min.js');

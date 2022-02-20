@@ -57,12 +57,6 @@ return [
         'title' => 'Gallery',
         'description' => 'Choose the gallery that will display'
     ],
-    'jqueryinject' => [
-        'title' => 'jQuery Inject',
-        'description' => 'Whether to inject jQuery or not',
-        'optionsyes' => 'Yes',
-        'optionsno' => 'No'
-    ],
     'thumbnail' => [
         'title' => 'Thumbnail Preview',
         'description' => 'Whether to display a button to show thumbnails',
