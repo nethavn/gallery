@@ -6,6 +6,7 @@ use nethavn\gallery\Models\Gallery as GalleryModel;
 
 class Gallery extends ComponentBase
 {
+    public $gallery;
     public function componentDetails()
     {
         return [
