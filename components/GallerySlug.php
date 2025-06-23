@@ -6,6 +6,7 @@ use Lang;
 
 class GallerySlug extends ComponentBase
 {
+    public $gallery;
     public function componentDetails()
     {
         return [
